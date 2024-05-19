@@ -5,6 +5,7 @@ architecture and libraries.
 
 - [x] MVI Architecture
 - [x] Jetpack Compose
+- [x] Jetpack Compose Navigation
 - [x] Kotlin
 - [x] Coroutines
 - [x] Room Database
