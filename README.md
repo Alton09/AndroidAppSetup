@@ -8,6 +8,7 @@ architecture and libraries.
 - [x] Jetpack Compose Navigation
 - [x] Kotlin
 - [x] Coroutines
+- [x] Retrofit
 - [x] Room Database
 - [x] Hilt DI
 - [x] Instrumentation Tests
