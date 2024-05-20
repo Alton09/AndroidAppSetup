@@ -9,7 +9,11 @@ plugins {
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint()
+        ktlint().editorConfigOverride(
+            mutableMapOf(
+                "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+            ) as Map<String, Any>?,
+        )
     }
     kotlinGradle {
         target("*.gradle.kts")
