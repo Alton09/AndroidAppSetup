@@ -2,7 +2,9 @@ package com.johnqualls.android.appsetup.articles.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
@@ -15,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.johnqualls.android.appsetup.core.ui.Presenter
 import com.johnqualls.android.appsetup.core.ui.Screen
+import com.johnqualls.android.appsetup.core.ui.theme.mediumSpacing
 import com.johnqualls.android.appsetup.core.ui.theme.smallSpacing
 
 @Preview
@@ -30,6 +33,12 @@ private fun ArticleScreenContentPreview() {
         state = ArticleUiState(
             isLoading = false,
             articles = listOf(
+                Article(
+                    "Everything to Know About Bitcoin Pizza Day",
+                    "Vinamrata Chaturvedi, Quartz",
+                    "On May 22, 2010, a man in Florida paid 10,000 Bitcoin for pizza.Read more...",
+                    "https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/98aec6479bad523f5c89763f4acf0cf9.jpg\"",
+                ),
                 Article(
                     "Everything to Know About Bitcoin Pizza Day",
                     "Vinamrata Chaturvedi, Quartz",
@@ -70,6 +79,10 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
                 articles.forEach { article ->
                     item {
                         ArticleCard(article)
+                        Spacer(
+                            modifier = Modifier
+                                .height(height = mediumSpacing),
+                        )
                     }
                 }
             }
