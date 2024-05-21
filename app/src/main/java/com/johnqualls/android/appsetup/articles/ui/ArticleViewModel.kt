@@ -23,3 +23,17 @@ class ArticleViewModel @Inject constructor() : Presenter<ArticleUiEvent, Article
         TODO("Not yet implemented")
     }
 }
+
+class ArticlePresenterFake : Presenter<ArticleUiEvent, ArticleUiState> {
+
+    override val uiState: StateFlow<ArticleUiState>
+        get() = MutableStateFlow(ArticleUiState())
+
+    override fun updateState(function: (ArticleUiState) -> ArticleUiState) {
+        // no-op
+    }
+
+    override fun receiveEvent(event: ArticleUiEvent) {
+        // no-op
+    }
+}
