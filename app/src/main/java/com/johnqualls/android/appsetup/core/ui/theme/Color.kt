@@ -1,4 +1,4 @@
-package com.johnqualls.android.appsetup.ui.theme
+package com.johnqualls.android.appsetup.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
