@@ -1,3 +1,7 @@
 package com.johnqualls.android.appsetup.articles.ui
 
-class ArticleUiState
+data class ArticleUiState(
+    val isLoading: Boolean = true,
+    val articles: List<Article> = emptyList(),
+    // TODO Add error states
+)
