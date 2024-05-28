@@ -77,6 +77,8 @@ dependencies {
     implementation(libs.retrofit.kotlinx.converter)
     implementation(libs.retrofit.logging)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
