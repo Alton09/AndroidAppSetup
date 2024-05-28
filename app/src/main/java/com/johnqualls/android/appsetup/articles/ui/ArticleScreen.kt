@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +26,6 @@ import com.johnqualls.android.appsetup.core.ui.Presenter
 import com.johnqualls.android.appsetup.core.ui.Screen
 import com.johnqualls.android.appsetup.core.ui.theme.AppSetupTheme
 import com.johnqualls.android.appsetup.core.ui.theme.mediumSpacing
-import com.johnqualls.android.appsetup.core.ui.theme.smallSpacing
 
 @Preview(showBackground = true)
 @Composable
@@ -108,7 +108,7 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
             AsyncImage(
                 model = image,
                 contentDescription = "Article Image",
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(mediumSpacing)
@@ -123,17 +123,18 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
             )
         }
         Text(
-            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = smallSpacing),
+            modifier = Modifier.padding(horizontal = mediumSpacing),
             text = article.title ?: "No Title Found",
             style = MaterialTheme.typography.headlineLarge,
         )
         Text(
-            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = smallSpacing),
+            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = mediumSpacing),
             text = article.author ?: "No Author Name Found",
             style = MaterialTheme.typography.titleLarge,
         )
+        Divider(modifier = Modifier.padding(horizontal = mediumSpacing))
         Text(
-            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = smallSpacing),
+            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = mediumSpacing),
             text = article.description ?: "No Description Found",
             style = MaterialTheme.typography.bodyLarge,
         )
