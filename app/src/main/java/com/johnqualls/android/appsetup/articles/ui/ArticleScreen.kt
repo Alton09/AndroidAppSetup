@@ -96,17 +96,17 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
         Card {
             Text(
                 modifier = Modifier.padding(smallSpacing),
-                text = article.title,
+                text = article.title ?: "No Title Found",
                 style = MaterialTheme.typography.headlineLarge,
             )
             Text(
                 modifier = Modifier.padding(smallSpacing),
-                text = article.author,
+                text = article.author ?: "No Author Name Found",
                 style = MaterialTheme.typography.titleLarge,
             )
             Text(
                 modifier = Modifier.padding(smallSpacing),
-                text = article.description,
+                text = article.description ?: "No Description Found",
                 style = MaterialTheme.typography.bodyLarge,
             )
         }

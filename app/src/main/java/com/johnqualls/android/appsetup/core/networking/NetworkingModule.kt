@@ -21,9 +21,10 @@ class NetworkingModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         val contentType = "application/json".toMediaType()
+        val json = Json { ignoreUnknownKeys = true }
         return Retrofit.Builder()
-            .addConverterFactory(Json.asConverterFactory(contentType))
-            .baseUrl("https://example.com/")
+            .addConverterFactory(json.asConverterFactory(contentType))
+            .baseUrl("https://newsapi.org/v2/")
             .client(buildHttpClient())
             .build()
     }

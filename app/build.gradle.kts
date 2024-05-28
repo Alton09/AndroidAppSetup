@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt.plugin)
     id("kotlin-kapt")
+    kotlin("plugin.serialization") version libs.versions.kotlin apply true
 }
 
 android {
