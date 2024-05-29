@@ -1,4 +1,4 @@
-package com.johnqualls.android.appsetup.articles.data.networking
+package com.johnqualls.android.appsetup.articles.data.remote
 
 import com.johnqualls.android.appsetup.BuildConfig
 import com.johnqualls.android.appsetup.articles.ui.ArticleResponse

@@ -1,6 +1,6 @@
 package com.johnqualls.android.appsetup.articles.data
 
-import com.johnqualls.android.appsetup.articles.data.networking.ArticleService
+import com.johnqualls.android.appsetup.articles.data.remote.ArticleService
 import javax.inject.Inject
 
 class ArticleRepository @Inject constructor(private val articleService: ArticleService) {
