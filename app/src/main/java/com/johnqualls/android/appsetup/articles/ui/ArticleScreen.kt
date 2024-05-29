@@ -2,16 +2,22 @@ package com.johnqualls.android.appsetup.articles.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -105,22 +111,34 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
     @Composable
     private fun ArticleCard(article: Article) {
         article.urlToImage?.let { image ->
-            AsyncImage(
-                model = image,
-                contentDescription = "Article Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(mediumSpacing)
-                    .clip(RoundedCornerShape(16.dp)),
-                onError = {
-                    Log.e(
-                        "ArticleScreen",
-                        "Error loading image",
-                        it.result.throwable,
+            Box(contentAlignment = Alignment.BottomStart) {
+                AsyncImage(
+                    model = image,
+                    contentDescription = "Article Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(mediumSpacing)
+                        .clip(RoundedCornerShape(16.dp)),
+                    onError = {
+                        Log.e(
+                            "ArticleScreen",
+                            "Error loading image",
+                            it.result.throwable,
+                        )
+                    },
+                )
+                FloatingActionButton(
+                    modifier = Modifier.padding(mediumSpacing).size(45.dp),
+                    onClick = { /*TODO*/ },
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Favorite",
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
-                },
-            )
+                }
+            }
         }
         Text(
             modifier = Modifier.padding(horizontal = mediumSpacing),
