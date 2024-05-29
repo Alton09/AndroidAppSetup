@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt.plugin)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     kotlin("plugin.serialization") version libs.versions.kotlin apply true
 }
 
@@ -79,7 +79,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.coil)
     implementation(libs.coil.compose)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.hilt.plugin) apply false
     alias(libs.plugins.spotless) apply true
+    alias(libs.plugins.ksp) apply true
 }
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
