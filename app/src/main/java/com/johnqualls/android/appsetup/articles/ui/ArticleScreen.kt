@@ -1,9 +1,13 @@
 package com.johnqualls.android.appsetup.articles.ui
 
 import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -71,9 +75,18 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
     Screen<ArticleUiEvent, ArticleUiState> {
     @Composable
     override fun Render(state: ArticleUiState) {
-        if (state.isLoading) {
+        AnimatedVisibility(
+            visible = state.isLoading,
+            enter = fadeIn(animationSpec = tween(durationMillis = 500)),
+            exit = fadeOut(animationSpec = tween(durationMillis = 500)),
+        ) {
             LoadingIndicator()
-        } else {
+        }
+        AnimatedVisibility(
+            visible = !state.isLoading,
+            enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
+            exit = fadeOut(animationSpec = tween(durationMillis = 1000)),
+        ) {
             Content(state.articles)
         }
     }
@@ -111,50 +124,57 @@ class ArticleScreen(override val presenter: Presenter<ArticleUiEvent, ArticleUiS
     @Composable
     private fun ArticleCard(article: Article) {
         article.urlToImage?.let { image ->
-            Box(contentAlignment = Alignment.BottomStart) {
-                AsyncImage(
-                    model = image,
-                    contentDescription = "Article Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(mediumSpacing)
-                        .clip(RoundedCornerShape(16.dp)),
-                    onError = {
-                        Log.e(
-                            "ArticleScreen",
-                            "Error loading image",
-                            it.result.throwable,
-                        )
-                    },
-                )
-                FloatingActionButton(
-                    modifier = Modifier.padding(mediumSpacing).size(45.dp),
-                    onClick = { /*TODO*/ },
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+            AsyncImage(
+                model = image,
+                contentDescription = "Article Image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(mediumSpacing)
+                    .clip(RoundedCornerShape(16.dp)),
+                onError = {
+                    Log.e(
+                        "ArticleScreen",
+                        "Error loading image",
+                        it.result.throwable,
                     )
-                }
-            }
+                },
+            )
         }
         Text(
             modifier = Modifier.padding(horizontal = mediumSpacing),
             text = article.title ?: "No Title Found",
             style = MaterialTheme.typography.headlineLarge,
         )
-        Text(
-            modifier = Modifier.padding(horizontal = mediumSpacing, vertical = mediumSpacing),
-            text = article.author ?: "No Author Name Found",
-            style = MaterialTheme.typography.titleLarge,
-        )
-        Divider(modifier = Modifier.padding(horizontal = mediumSpacing))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                modifier = Modifier.padding(horizontal = mediumSpacing, vertical = mediumSpacing),
+                text = article.author ?: "No Author Name Found",
+                style = MaterialTheme.typography.titleLarge,
+            )
+
+            FloatingActionButton(
+                modifier = Modifier
+                    .padding(mediumSpacing)
+                    .size(45.dp),
+                onClick = { /*TODO*/ },
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.FavoriteBorder,
+                    contentDescription = "Favorite",
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                )
+            }
+        }
         Text(
             modifier = Modifier.padding(horizontal = mediumSpacing, vertical = mediumSpacing),
             text = article.description ?: "No Description Found",
             style = MaterialTheme.typography.bodyLarge,
         )
+        Divider(modifier = Modifier.padding(horizontal = mediumSpacing))
     }
 }
