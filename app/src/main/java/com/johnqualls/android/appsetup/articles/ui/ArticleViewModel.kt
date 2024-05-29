@@ -23,13 +23,12 @@ class ArticleViewModel @Inject constructor(private val articleRepository: Articl
     init {
         viewModelScope.launch {
             try {
-                val articles = articleRepository.getArticles()
-                updateState { it.copy(articles = articles) }
+                articleRepository.observeArticles().collect { newArticles ->
+                    updateState { it.copy(articles = newArticles, isLoading = false) }
+                }
             } catch (e: Exception) {
                 Log.e("JAQ", e.message, e)
                 // TODO Add error state
-            } finally {
-                updateState { it.copy(isLoading = false) }
             }
         }
     }
